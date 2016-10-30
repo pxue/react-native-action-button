@@ -45,15 +45,25 @@ export default class ActionButtonItem extends Component {
           }]}
       >
         <TouchableOpacity style={{flex:1}} activeOpacity={this.props.activeOpacity || 0.85} onPress={this.props.onPress}>
-          <View
-            style={[styles.actionButton,{
-                width: this.props.size,
-                height: this.props.size,
-                borderRadius: this.props.size / 2,
-                backgroundColor: this.props.buttonColor,
-              }]}
-          >
-            {this.props.children}
+          <View style={[
+            {
+              width: this.props.size + 10,
+              height: this.props.size + 10,
+              borderRadius: (this.props.size + 10) / 2,
+              backgroundColor: 'rgba(255,255,255,0.6)',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }
+          ]}>
+            <View
+              style={[styles.actionButton,{
+                  width: this.props.size,
+                  height: this.props.size,
+                  borderRadius: this.props.size / 2,
+                  backgroundColor: this.props.buttonColor,
+                }]}>
+              {this.props.children}
+            </View>
           </View>
         </TouchableOpacity>
       </Animated.View>
@@ -79,7 +89,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingTop: 2,
     shadowOpacity: 0.3,
     shadowOffset: {
       width: 0,
@@ -87,7 +96,5 @@ const styles = StyleSheet.create({
     },
     shadowColor: '#444',
     shadowRadius: 1,
-    backgroundColor: 'red',
-    position: 'absolute',
   },
 });

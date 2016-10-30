@@ -114,34 +114,46 @@ export default class ActionButton extends Component {
               }
             }}
         >
-          <Animated.View
-            style={
-              [
-                styles.btn,
-                {
-                  width: this.props.size,
-                  height: this.props.size,
-                  borderRadius: this.props.size / 2,
-                  backgroundColor: this.state.anim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [this.props.buttonColor, this.props.btnOutRange]
-                  }),
-                  transform: [
-                    {
-                      scale: this.state.anim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [1, this.props.outRangeScale]
-                      }),
-                    },
-                    {
-                      rotate: this.state.anim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: ['0deg', this.props.degrees + 'deg']
-                      }),
-                    }],
-                }]}>
-            {this.renderButtonIcon()}
-          </Animated.View>
+          <View style={
+            [
+              styles.btn,
+              {
+                width: this.props.size + 10,
+                height: this.props.size + 10,
+                borderRadius: (this.props.size + 10) / 2,
+                backgroundColor: 'rgba(255,255,255,0.6)',
+              }
+            ]
+          }>
+            <Animated.View
+              style={
+                [
+                  styles.btn,
+                  {
+                    width: this.props.size,
+                    height: this.props.size,
+                    borderRadius: this.props.size / 2,
+                    backgroundColor: this.state.anim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [this.props.buttonColor, this.props.btnOutRange]
+                    }),
+                    transform: [
+                      {
+                        scale: this.state.anim.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [1, this.props.outRangeScale]
+                        }),
+                      },
+                      {
+                        rotate: this.state.anim.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: ['0deg', this.props.degrees + 'deg']
+                        }),
+                      }],
+                  }]}>
+              {this.renderButtonIcon()}
+            </Animated.View>
+          </View>
         </TouchableOpacity>
       </View>
     );
@@ -218,7 +230,7 @@ export default class ActionButton extends Component {
       backdrop = (
         <TouchableWithoutFeedback
           style={styles.overlay}
-          onPress={() => {this.reset(); this.props.onOverlayPress()}}
+          onPress={() => this.reset()}
         >
           <Animated.View
             style={
@@ -264,7 +276,6 @@ ActionButton.propTypes = {
   itemSize: PropTypes.number,
   autoInactive: PropTypes.bool,
   onPress: PropTypes.func,
-  onOverlayPress: PropTypes.func,
   backdrop: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.object,
@@ -285,7 +296,6 @@ ActionButton.defaultProps = {
   outRangeScale: 1,
   autoInactive: true,
   onPress: () => {},
-  onOverlayPress: () => {},
   backdrop: false,
   degrees: 135,
   size: 63,
@@ -306,7 +316,7 @@ const styles = StyleSheet.create({
   },
   actionContainer: {
     flexDirection: 'column',
-    padding: 10,
+    padding: 50,
   },
   actionBarItem: {
     alignItems: 'center',
